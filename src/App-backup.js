@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import { bindActionCreators } from 'redux'
 import {connect} from 'react-redux';
-import { handleAdd, handleLess } from "./store/reducers/operator";
 
 class App extends Component {
     render() {
@@ -20,11 +18,11 @@ class App extends Component {
                 <div className="row">
                     <div className="d-flex col-12 pb-2  justify-content-center">
                         <div className="pr-2">
-                            <button className="btn btn-primary" onClick={this.props.actions.handleAdd} id="aumentar">Aumentar
+                            <button className="btn btn-primary" onClick={this.props.aumentar} id="aumentar">Aumentar
                             </button>
                         </div>
                         <div>
-                            <button className="btn btn-secondary" onClick={this.props.actions.handleLess}
+                            <button className="btn btn-secondary" onClick={this.props.disminuir}
                                     id="disminuir">Disminuir
                             </button>
                         </div>
@@ -42,7 +40,7 @@ class App extends Component {
 // and update / runner again
 const mapStateToProps = (state) => {
     // return object js
-    return {informacion: state.operator.cantidad}
+    return {informacion: state.cantidad}
 };
 // 1er metodo de Dispatch.
 // const mapDispatchToProps = {
@@ -51,17 +49,15 @@ const mapStateToProps = (state) => {
 // };
 
 // otro
-
-
-
-
 const mapDispatchToProps = (dispatch) => {
-   return {
-       actions: bindActionCreators({
-          handleLess,
-           handleAdd
-       }, dispatch),
-   }
+    return {
+        aumentar: () => {
+            dispatch({type: "AUM"});
+        },
+        disminuir: () => {
+            dispatch({type: "DIS"});
+        }
+    };
 };
 
 //below use connect to acces the state and dispatch actions & action creator.
