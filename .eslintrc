@@ -3,6 +3,10 @@
   "plugins": [
     "react"
   ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "rules": {
     "space-in-parens": [ 0, "always" ],
     "template-curly-spacing": [ 2, "always" ],
