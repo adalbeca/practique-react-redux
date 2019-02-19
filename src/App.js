@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { handleAdd, handleLess,handleInput } from './store/reducers/operator';
-
+import Header from './layout/Header';
+import ContValue from './components/ContValue';
 class App extends Component {
-    agregarTarea = (e)=>{
+    agregarTarea = e =>{
       if(e.which===13) {
           console.log(e.target.value);
           this.props.actions.handleInput(e.target.value);
@@ -20,21 +21,17 @@ class App extends Component {
 
         return (
             <div className="container-fluid pt-4 ">
-                <div className="row d-flex ">
-                    <div className="d-flex col-12 pb-2 justify-content-center"> Test Redux simple</div>
-                </div>
-                <div className="row">
-                    <div className="d-flex col-12 pb-2 justify-content-center">
-                        <div>
-                            <div>Valor: <span id="valor"> { this.props.value } </span></div>
-                        </div>
-                    </div>
-                </div>
+                <Header/>
+                <ContValue
+                    value={ this.props.value }
+                />
+
                 <div className="row">
                     <div className="d-flex col-12 pb-2  justify-content-center">
                         <div className="pr-2">
-                            <button className="btn btn-primary" onClick={ this.props.actions.handleAdd }
-                                    id="aumentar">Aumentar
+                            <button
+                                className="btn btn-primary" onClick={ this.props.actions.handleAdd }
+                                id="aumentar">Aumentar
                             </button>
                         </div>
                         <div>
@@ -59,7 +56,7 @@ class App extends Component {
 
 // this is a function, this make a subscription and get state, and this function always check any change in the State
 // and update / runner again
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     // return object js
     return {
         value: state.operator.cantidad,
@@ -67,7 +64,7 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
     return {
         actions: bindActionCreators({
             handleLess,
@@ -77,6 +74,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-//below use connect to acces the state and dispatch actions & action creator.
+//below use connect to access the state and dispatch actions & action creator.
 //connect use 2 params. the first is mapStateToProps, mapDispatchToProps
 export default connect(mapStateToProps, mapDispatchToProps)(App);
