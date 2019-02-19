@@ -5,6 +5,24 @@ import { handleAdd, handleLess,handleInput } from './store/reducers/operator';
 import Header from './layout/Header';
 import ContValue from './components/ContValue';
 class App extends Component {
+    constructor(props){
+        super();
+        this.state={
+            productos:[]
+        }
+    }
+    componentDidMount() {
+        const productos = [
+            { producto: 'Libro', precio: 200 },
+            { producto: 'Disco Musica', precio: 250 },
+            { producto: 'Instrumento Musical', precio: 800 },
+            { producto: 'Album Musical', precio: 100 },
+        ];
+        this.setState({
+            productos:productos
+        })
+    }
+
     agregarTarea = e =>{
       if(e.which===13) {
           console.log(e.target.value);
@@ -18,12 +36,12 @@ class App extends Component {
             contador=contador+1;
             return (<li key={ contador }>{ tar }</li>);
         });
-
         return (
             <div className="container-fluid pt-4 ">
                 <Header/>
                 <ContValue
                     value={ this.props.value }
+                    productos = { this.state.productos }
                 />
 
                 <div className="row">
